@@ -25,12 +25,16 @@ class WidgetsController < ApplicationController
   end
 
   def grid
+    @projects = @scrumninja.projects
+    @rows = []
+    @projects.each do |project|
+      @rows << [ project.name, project.id,]
+    end
     @rows = [
-      ['Platform', 'Blurb', 'Blarb', ['Z@statuspanic', 'javier@granicus.com']],
-      ['Meeting Efficency', 'Blurb', 'Blarb', ['Z@statuspanic', 'L@statuspanic', 'I@statuspanic']],
-      ['Legislative Management', 'Blurb', 'Blarb', ['Z@statuspanic, H@statuspanic, P@statuspanic']],
-      ['Citizen Participation', 'Blurb', 'Blarb', ['G@statuspanic, L@statuspanic']],
-      ['EXCITING', 'Blurb', 'Blarb', ['L@statuspanic, G@statuspanic, I@statuspanic']]
+      ['Platform', 'Platform', ['Z@statuspanic', 'javier@granicus.com']],
+      ['Meeting Efficency', 'Meeting', ['Z@statuspanic', 'L@statuspanic', 'I@statuspanic']],
+      ['Legislative', 'Legislative', ['Z@statuspanic, H@statuspanic, P@statuspanic']],
+      ['Citizen Participation', 'Citizen', ['G@statuspanic, L@statuspanic']]
     ]
   end
 
