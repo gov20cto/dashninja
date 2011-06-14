@@ -1,0 +1,24 @@
+<div>
+<table border='0' width='100%' cellpadding='0' cellspacing='10'>
+<%
+@rows.each_with_index do |row,count| 
+css_class = count % 2 ? " class='alt'" : ''
+%>
+	<tr class='<%= css_class %>'>
+	<% row.each_with_index do |column,index| %>
+	<td class='cell_<%= index %>'>
+	<% if (index!=3) then %>
+		<%= column %>
+	<% else %>
+		<% column.each do |email| 
+			gravatar = Digest::MD5.hexdigest(email)
+		%>
+			<img src="http://www.gravatar.com/avatar.php?gravatar_id=<%= gravatar %>&s=40&d=monsterid">
+		<% end %>
+	<% end %>
+	</td>
+	<% end %>
+	</tr>
+<% end %>
+</table>
+</div>

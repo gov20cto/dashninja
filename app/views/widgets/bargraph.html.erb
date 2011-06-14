@@ -1,0 +1,33 @@
+<div>
+  <div class="bars">
+<% 
+# change these
+max_bar_width = 300
+default_padding = 12
+
+# don't change these
+total_outer = (default_padding * 2)
+max_width = params[:width].to_i
+num_bars = @bars.count
+bar_width = [max_bar_width, (max_width - (total_outer * num_bars)) / num_bars].min.floor
+final_padding = [default_padding, (max_width - (( bar_width + total_outer ) * num_bars)) / num_bars / 2].max
+count = 0
+@bars.each do |bar|
+    count = count + 1
+    bar_percent_top = bar[:completed].to_f / (bar[:completed] + bar[:remaining]).to_f
+    bar_height = (bar_percent_top * params[:height].to_i).floor
+    top_offset = params[:height].to_i - bar_height
+%>
+    <div class='bar' style='margin-top: <%= top_offset %>px; width: <%= bar_width %>px; padding: 0 <%= final_padding %>px;'>
+      <div class='header'><span class="total"><%= (bar_percent_top * 100).floor %>%</span></div>
+      <div class='view' id='bar_<%= count %>' style='height: <%= bar_height %>px;'></div>
+    </div>
+<% end %>
+  </div>
+<% @bars.each do |bar| %>
+  <div class='bar-title' style='width: <%= bar_width %>px; padding: 0 <%= final_padding %>px;'>
+    <span class='title'><%= bar[:name] %></span>
+  </div>
+<% end %>
+  <div style='clear:both'></div>
+</div>

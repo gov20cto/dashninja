@@ -1,0 +1,12 @@
+<div>
+<span class='<%= @widget.class %>' id='arrow_icon'>
+<% if @widget.value < 0 %>
+A
+<% elsif @widget.value > 0 %>
+A
+<% else %>
+K
+<% end %>
+</span>
+<span class='mega'><%= @widget.value %>%</span>
+</div>
