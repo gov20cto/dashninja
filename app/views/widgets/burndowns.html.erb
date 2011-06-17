@@ -18,8 +18,8 @@ count = 0
     <div class='burndown' style='margin-top: 0px; width: <%= burndown_width %>px; padding: 0 <%= final_padding %>px;'>
 		<script type="text/javascript">
 		    $( function() {
-		      var entries<%= count %> = [ <% burndown[:estimates].each do |count| %>{ "count" : <%= count %> },<% end %> ];
-		      Burndown('burndown_<%= count %>').data(<%= burndown[:start] %>,<%= burndown[:length] %>,entries<%= count %>).draw();
+		      var entries<%= count %> = [ <% burndown.estimates.each do |count| %>{ "count" : <%= count %> },<% end %> ];
+		      Burndown('burndown_<%= count %>').data(<%= burndown.start %>,<%= burndown.length %>,entries<%= count %>).draw();
 		    });
 		  </script>
       <div class='view' id='burndown_<%= count %>' style='height: <%= params[:height] %>px;'></div>
@@ -28,7 +28,7 @@ count = 0
   </div>
 <% @burndowns.each do |burndown| %>
   <div class='burndown-title' style='width: <%= burndown_width %>px; padding: 0 <%= final_padding %>px;'>
-    <span class='title'><%= burndown[:name] %></span>
+    <span class='title'><%= burndown.name %></span>
   </div>
 <% end %>
   <div style='clear:both'></div>

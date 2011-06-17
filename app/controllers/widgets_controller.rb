@@ -1,7 +1,6 @@
 require "digest"
-require "burndown"
+
 class WidgetsController < ApplicationController
-  include ScrumNinja::Burndown
   
   def initialize
     @project_map = {
@@ -32,8 +31,8 @@ class WidgetsController < ApplicationController
     @burndowns = []
     @projects.each do |project|
       next unless @project_map.keys.include? project.name.downcase
-      burndown = get_project_burndown project.id
-      burndown[:name] = project.name
+      burndown = @scrumninja.project_burndown project.id
+      burndown.name = project.name
       @burndowns << burndown
     end
     params[:width] = 1080 if params[:width].nil?
