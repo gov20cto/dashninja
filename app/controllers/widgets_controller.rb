@@ -1,6 +1,16 @@
 require "digest"
 
 class WidgetsController < ApplicationController
+  def initialize
+    @project_map = {
+      "platform" => "P/GT",
+      "meeting efficiency" => "ME",
+      "citizen participation" => "CP",
+      "legislative management" => "LM",
+    }
+    super
+  end
+  
   def arrow
   end
 
@@ -27,15 +37,34 @@ class WidgetsController < ApplicationController
   def grid
     @projects = @scrumninja.projects
     @rows = []
+    @stories = []
     @projects.each do |project|
-      @rows << [ project.name, project.id,]
+      next unless @project_map.keys.include? project.name.downcase
+      stories = @scrumninja.project_stories project.id
+      people = @scrumninja.project_roles project.id
+      card_wall = @scrumninja.project_card_wall project.id
+      
+      stories.each do |story|
+        story.project_name = project.name
+        story.people = Set.new
+        unless card_wall.nil? then 
+          filtered = card_wall.find_all {|task| !task.assigned_to_user_id.nil?  && task.story_id == story.id }
+          next if filtered.nil?
+          unless filtered.is_a? Array then
+            story.people.add people.find {|person| person.user_id == filtered.assigned_to_user_id.to_i }
+          else
+            filtered.each do |task|
+              story.people.add people.find {|person| person.user_id == task.assigned_to_user_id.to_i }
+            end
+          end
+        end
+      end
+      @stories.concat stories
     end
-    @rows = [
-      ['Platform', 'Platform', ['Z@statuspanic', 'javier@granicus.com']],
-      ['Meeting Efficency', 'Meeting', ['Z@statuspanic', 'L@statuspanic', 'I@statuspanic']],
-      ['Legislative', 'Legislative', ['Z@statuspanic, H@statuspanic, P@statuspanic']],
-      ['Citizen Participation', 'Citizen', ['G@statuspanic, L@statuspanic']]
-    ]
+    @stories.sort_by! {|story| story.name }
+    @stories.each do |story|
+      @rows << [ story.name, @project_map[story.project_name.downcase], story.people.map {|person| person.nil? ? nil : person.user.email } ]
+    end
   end
 
   def meta

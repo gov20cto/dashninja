@@ -131,10 +131,9 @@ tr {
 }
 
 /* widths */
-.cell_0 { width: 35%; }
-.cell_1 { width: 20%; }
-.cell_2 { width: 20%; }
-.cell_3 { width: 25%; }
+.cell_0 {  }
+.cell_1 { width: 100px; }
+.cell_2 { width: 200px; }
 
 /* custom bling */
 .cell_3 {
