@@ -1,9 +1,11 @@
 require "digest"
-
+require "burndown"
 class WidgetsController < ApplicationController
+  include ScrumNinja::Burndown
+  
   def initialize
     @project_map = {
-      "platform" => "P/GT",
+      "platform" => "PT",
       "meeting efficiency" => "ME",
       "citizen participation" => "CP",
       "legislative management" => "LM",
@@ -23,6 +25,19 @@ class WidgetsController < ApplicationController
     ]
     params[:width] = 1080 if params[:width].nil?
     params[:height] = 300 if params[:height].nil?
+  end
+  
+  def burndowns
+    @projects = @scrumninja.projects
+    @burndowns = []
+    @projects.each do |project|
+      next unless @project_map.keys.include? project.name.downcase
+      burndown = get_project_burndown project.id
+      burndown[:name] = project.name
+      @burndowns << burndown
+    end
+    params[:width] = 1080 if params[:width].nil?
+    params[:height] = 250 if params[:height].nil?
   end
 
   def bubblelist

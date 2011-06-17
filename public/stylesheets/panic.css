@@ -102,7 +102,7 @@ font-family: 'Cutouts';
 /* @group GRID MODULE */
 
 table {
-font-size: 32px;
+font-size: 28px;
 border-spacing: 10px 10px;
 }
 
@@ -132,7 +132,7 @@ tr {
 
 /* widths */
 .cell_0 {  }
-.cell_1 { width: 100px; }
+.cell_1 { width: 75px; padding-left: 5px; }
 .cell_2 { width: 200px; }
 
 /* custom bling */
@@ -331,6 +331,81 @@ border-top-color: #1288ff;
 }
 
 #bar_6 {
+background: #d8d309;
+border-color: #d8d309;
+/* border-left-color: #beba06; */
+border-left-color: #ede80a;
+border-top-color: #ede80a;
+  border-right-color: #beba06;
+}
+
+/* @end */
+
+/* @group BURNDOWN MODULE */
+
+#burndowns>div {
+}
+
+.burndown {
+position: relative;
+height: auto;
+float: left;
+padding: 0 12px;
+}
+.burndowns {
+  border-bottom: 1px solid #999;
+float: left;
+}
+.burndown-title {
+margin-top: 12px;
+float: left;
+}
+
+.burndown .header {
+  top: -4px;
+  position:relative;
+  font-size: 36px;
+  font-weight: thin;
+letter-spacing: -0.08em;
+}
+.burndown .total {
+  color: #fff;
+  font-weight: bold;
+}
+.burndown .remaining {
+  color: #6cdaff;
+}
+
+.burndown .view {
+  border-bottom: 0px;
+}
+
+#burndown_1 {
+
+}
+
+#burndown_2 {
+
+}
+
+#burndown_3 {
+
+}
+
+#burndown_4 {
+
+}
+
+#burndown_5 {
+background: #107CF8;
+border-color: #107CF8;
+/* border-left-color: #3368d7; */
+border-left-color: #1288ff;
+border-top-color: #1288ff;
+  border-right-color: #3368d7;
+}
+
+#burndown_6 {
 background: #d8d309;
 border-color: #d8d309;
 /* border-left-color: #beba06; */

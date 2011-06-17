@@ -3,6 +3,8 @@ Dashninja::Application.routes.draw do
   get "widgets/arrow"
 
   get "widgets/bargraph"
+  
+  get "widgets/burndowns"
 
   get "widgets/bubblelist"
 

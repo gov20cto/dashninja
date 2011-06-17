@@ -25,8 +25,8 @@ var Burndown = function(dom_id) {
 	  var length = this.sprint_length;
 
           // Set-up dimensions and scales for the chart
-      var w = 600,
-          h = 300,
+      var w = 300,
+          h = 250,
           max = pv.max(entries, function(d) { return d.count;}),
           x = pv.Scale.linear(0, length).range(0, w),
           y = pv.Scale.linear(0, max).range(0, h);
@@ -39,19 +39,6 @@ var Burndown = function(dom_id) {
           .left(20)
           .right(40)
           .top(40);
-
-           // Add the chart legend at top left
-       vis.add(pv.Label)
-           .top(-20)
-           .text(function() {
-             var first = new Date(start);
-             var last  = new Date(start + (length * 86400000));
-             return "Burndown for sprint starting on " +
-                    [first.getMonth()+1,first.getDate(),first.getFullYear()].join("/") +
-                    " and ending on " +
-                    [last.getMonth()+1, last.getDate(), last.getFullYear()].join("/");
-            })
-           .textStyle("#B1B1B1")
 
            // Add the X-ticks
        vis.add(pv.Rule)
@@ -67,15 +54,16 @@ var Burndown = function(dom_id) {
             .textStyle("#2C90C8")
             .textMargin("5")
 
-           // Add the Y-ticks
-       vis.add(pv.Rule)
-           // Compute tick levels based on the "max" value
-           .data(y.ticks(max/(max/10)))
-           .bottom(y)
-           .strokeStyle("#eee")
-           .anchor("left").add(pv.Label)
-            .text(y.tickFormat)
-            .textStyle("#c0c0c0")
+	           // Add the Y-ticks
+	       vis.add(pv.Rule)
+	           // Compute tick levels based on the "max" value
+	           .data(y.ticks(max/(max/10)))
+	           .bottom(y)
+			   .width(0)
+	           .strokeStyle("#eee")
+	           .anchor("left").add(pv.Label)
+	            .text(y.tickFormat)
+	            .textStyle("#c0c0c0")
 
            // Add container panel for the chart
        vis.add(pv.Panel)
