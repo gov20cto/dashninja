@@ -2,14 +2,13 @@
   <div class="burndowns">
 <% 
 # change these
-max_burndown_width = 300
 default_padding = 12
 
 # don't change these
 total_outer = (default_padding * 2)
 max_width = params[:width].to_i
 num_burndowns = @burndowns.count
-burndown_width = [max_burndown_width, (max_width - (total_outer * num_burndowns)) / num_burndowns].min.floor
+burndown_width =  ((max_width - (total_outer * num_burndowns)) / num_burndowns).floor
 final_padding = [default_padding, (max_width - (( burndown_width + total_outer ) * num_burndowns)) / num_burndowns / 2].max
 count = 0
 @burndowns.each do |burndown|
