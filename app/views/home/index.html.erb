@@ -3,5 +3,5 @@
 	style='width: <%= widget[:width] %>px;
 	<% if not widget[:height].nil? %>height: <%= widget[:height]%>px;<% end %>'>
 </div>
-<script type='text/javascript'>activate_module('<%= widget[:name] %>', <%= widget[:update] %>, '');</script>
+<script type='text/javascript'>activate_module('<%= widget[:name] %>', <%= widget[:update] %>, 'width=<%= widget[:width]%>');</script>
 <% end %>

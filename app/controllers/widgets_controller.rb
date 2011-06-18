@@ -22,7 +22,7 @@ class WidgetsController < ApplicationController
       { :name => 'Legislative Management', :completed => 24, :remaining => 19 },
       { :name => 'Citizen Participation', :completed => 14, :remaining => 4 }
     ]
-    params[:width] = 1000 if params[:width].nil?
+    params[:width] = 1020 if params[:width].nil?
     params[:height] = 300 if params[:height].nil?
   end
   
@@ -35,7 +35,7 @@ class WidgetsController < ApplicationController
       burndown.name = project.name
       @burndowns << burndown
     end
-    params[:width] = 1000 if params[:width].nil?
+    params[:width] = 1020 if params[:width].nil?
     params[:height] = 250 if params[:height].nil?
   end
 

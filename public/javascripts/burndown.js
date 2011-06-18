@@ -25,7 +25,7 @@ var Burndown = function(dom_id, b_width, b_height) {
 	  var length = this.sprint_length;
 
           // Set-up dimensions and scales for the chart
-      var w = b_width - 35,
+      var w = b_width - 30,
           h = b_height - 25,
           max = pv.max(entries, function(d) { return d.count;}),
           x = pv.Scale.linear(0, length).range(0, w),
@@ -37,7 +37,7 @@ var Burndown = function(dom_id, b_width, b_height) {
           .height(h)
           .bottom(20)
           .left(20)
-          .right(25)
+          .right(10)
           .top(5);
 
            // Add the X-ticks
@@ -54,6 +54,7 @@ var Burndown = function(dom_id, b_width, b_height) {
             .text(function(d) { 
 				var date = new Date(start + (this.index * 86400000)); 
 				day = date.getDate().toString().length > 1 ? date.getDate() : "0" + date.getDate();
+				if(this.index == length) { return ""; }
 				return [date.getMonth()+1, day ].join('/'); })
             .textStyle("#2C90C8")
             .textMargin("2")
