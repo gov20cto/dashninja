@@ -50,9 +50,12 @@ var Burndown = function(dom_id) {
            .strokeStyle("#33A3E1")
            // Add the tick label (DD/MM)
            .anchor("right").add(pv.Label)
-            .text(function(d) { var date = new Date(start + (this.index * 86400000)); return [date.getMonth()+1, date.getDate()].join('/'); })
+            .text(function(d) { 
+				var date = new Date(start + (this.index * 86400000)); 
+				day = date.getDate().toString().length > 1 ? date.getDate() : "0" + date.getDate();
+				return [date.getMonth()+1, day ].join('/'); })
             .textStyle("#2C90C8")
-            .textMargin("5")
+            .textMargin("2")
 
 	           // Add the Y-ticks
 	       vis.add(pv.Rule)
