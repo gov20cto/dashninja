@@ -4,7 +4,7 @@
 //
 // See http://vis.stanford.edu/protovis/ex/area.html
 //
-var Burndown = function(dom_id) {
+var Burndown = function(dom_id, b_width, b_height) {
   // Set the default DOM element ID to bind
   if ('undefined' == typeof dom_id)  dom_id = 'chart';
 
@@ -25,8 +25,8 @@ var Burndown = function(dom_id) {
 	  var length = this.sprint_length;
 
           // Set-up dimensions and scales for the chart
-      var w = 300,
-          h = 250,
+      var w = b_width,
+          h = b_height,
           max = pv.max(entries, function(d) { return d.count;}),
           x = pv.Scale.linear(0, length).range(0, w),
           y = pv.Scale.linear(0, max).range(0, h);
@@ -41,6 +41,7 @@ var Burndown = function(dom_id) {
           .top(40);
 
            // Add the X-ticks
+
        vis.add(pv.Rule)
            .data(x.ticks(length))
            .visible(function(d) {return start + (this.index * 86400000);})

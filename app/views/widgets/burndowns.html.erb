@@ -18,7 +18,7 @@ count = 0
 		<script type="text/javascript">
 		    $( function() {
 		      var entries<%= count %> = [ <% burndown.estimates.each do |count| %>{ "count" : <%= count %> },<% end %> ];
-		      Burndown('burndown_<%= count %>').data(<%= burndown.start %>,<%= burndown.sprint_length %>,entries<%= count %>).draw();
+		      Burndown('burndown_<%= count %>',<%= burndown_width - 24 %>, <%= params[:height] %>).data(<%= burndown.start %>,<%= burndown.sprint_length %>,entries<%= count %>).draw();
 		    });
 		  </script>
       <div class='view' id='burndown_<%= count %>' style='height: <%= params[:height] %>px;'></div>
