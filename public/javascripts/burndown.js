@@ -25,8 +25,8 @@ var Burndown = function(dom_id, b_width, b_height) {
 	  var length = this.sprint_length;
 
           // Set-up dimensions and scales for the chart
-      var w = b_width,
-          h = b_height,
+      var w = b_width - 35,
+          h = b_height - 25,
           max = pv.max(entries, function(d) { return d.count;}),
           x = pv.Scale.linear(0, length).range(0, w),
           y = pv.Scale.linear(0, max).range(0, h);
@@ -37,8 +37,8 @@ var Burndown = function(dom_id, b_width, b_height) {
           .height(h)
           .bottom(20)
           .left(20)
-          .right(40)
-          .top(40);
+          .right(25)
+          .top(5);
 
            // Add the X-ticks
 

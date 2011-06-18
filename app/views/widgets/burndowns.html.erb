@@ -2,27 +2,25 @@
   <div class="burndowns">
 <% 
 # change these
-default_padding = 12
+default_padding = 0
 
 # don't change these
 total_outer = (default_padding * 2)
 max_width = params[:width].to_i
-num_burndowns = @burndowns.count
+num_burndowns = @burndowns.count == 0 ? 1 : @burndowns.count
 burndown_width =  ((max_width - (total_outer * num_burndowns)) / num_burndowns).floor
 final_padding = [default_padding, (max_width - (( burndown_width + total_outer ) * num_burndowns)) / num_burndowns / 2].max
 count = 0
 @burndowns.each do |burndown|
     count = count + 1
 %>
-    <div class='burndown' style='margin-top: 0px; width: <%= burndown_width %>px; padding: 0 <%= final_padding %>px;'>
-		<script type="text/javascript">
-		    $( function() {
-		      var entries<%= count %> = [ <% burndown.estimates.each do |count| %>{ "count" : <%= count %> },<% end %> ];
-		      Burndown('burndown_<%= count %>',<%= burndown_width - 24 %>, <%= params[:height] %>).data(<%= burndown.start %>,<%= burndown.sprint_length %>,entries<%= count %>).draw();
-		    });
-		  </script>
-      <div class='view' id='burndown_<%= count %>' style='height: <%= params[:height] %>px;'></div>
-    </div>
+<script type="text/javascript">
+    $( function() {
+      var entries<%= count %> = [ <% burndown.estimates.each do |count| %>{ "count" : <%= count %> },<% end %> ];
+      Burndown('burndown_<%= count %>',<%= burndown_width - 24 %>, <%= params[:height] %>).data(<%= burndown.start %>,<%= burndown.sprint_length %>,entries<%= count %>).draw();
+    });
+  </script>
+    <div class='burndown' id='burndown_<%= count %>' style='margin-top: 0px; width: <%= burndown_width %>px; height: <%= params[:height] %>px; padding: 0 <%= final_padding %>px;'></div>
 <% end %>
   </div>
 <% @burndowns.each do |burndown| %>
