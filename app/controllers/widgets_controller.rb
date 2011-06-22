@@ -1,17 +1,6 @@
 require "digest"
 
 class WidgetsController < ApplicationController
-  
-  def initialize
-    @project_map = {
-      "platform" => "PT",
-      "meeting efficiency" => "ME",
-      "citizen participation" => "CP",
-      "legislative management" => "LM",
-    }
-    super
-  end
-  
   def arrow
   end
 
