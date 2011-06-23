@@ -2,11 +2,11 @@
 <table border='0' width='100%' cellpadding='0' cellspacing='10'>
 <%
 @rows.each_with_index do |row,count| 
-css_class = count % 2 ? "alt" : ''
+css_class = ['accepted','delivered'].include? row[3] ? 'alt' : ''
 %>
 	<tr class='<%= css_class %>'>
 	<% row.each_with_index do |column,index| %>
-	<td class='cell_<%= index %> <%= ['accepted','delivered'].include? row[3] ? 'alt' : '' %>'>
+	<td class='cell_<%= index %>'>
 	<% if (index < 2) then %>
 		<%= column %>
 	<% elsif (index == 2) %>
