@@ -2,7 +2,7 @@
 <table border='0' width='100%' cellpadding='0' cellspacing='10'>
 <%
 @rows.each_with_index do |row,count| 
-css_class = count % 2 ? " class='alt'" : ''
+css_class = count % 2 ? "alt" : ''
 %>
 	<tr class='<%= css_class %>'>
 	<% row.each_with_index do |column,index| %>
