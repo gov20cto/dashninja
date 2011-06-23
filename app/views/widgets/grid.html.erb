@@ -6,10 +6,10 @@ css_class = count % 2 ? " class='alt'" : ''
 %>
 	<tr class='<%= css_class %>'>
 	<% row.each_with_index do |column,index| %>
-	<td class='cell_<%= index %>'>
-	<% if (index!=2) then %>
+	<td class='cell_<%= index %> <%= ['accepted','delivered'].include? row[3] ? 'alt' : '' %>'>
+	<% if (index > 1) then %>
 		<%= column %>
-	<% else %>
+	<% elsif (index == 2) %>
 		<% column.each do |email| 
 			gravatar = Digest::MD5.hexdigest(email)
 		%>

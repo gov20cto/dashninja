@@ -66,7 +66,7 @@ class WidgetsController < ApplicationController
     end
     @stories.sort_by! {|story| story.updated_at }.reverse!
     @stories.each do |story|
-      @rows << [ story.name, @project_map[story.project_name.downcase], story.people.map {|person| person.nil? ? nil : person.user.email } ]
+      @rows << [ story.name, @project_map[story.project_name.downcase], story.people.map {|person| person.nil? ? nil : person.user.email }, story.status ]
     end
   end
 
