@@ -1,0 +1,7 @@
+<% @widgets.each do |widget| %>
+<div class='module <%= widget[:class] %>' id='<%= widget[:name] %>' 
+	style='width: <%= widget[:width] %>px;
+	<% if not widget[:height].nil? %>height: <%= widget[:height]%>px;<% end %>'>
+</div>
+<script type='text/javascript'>activate_module('<%= widget[:name] %>', <%= widget[:update] %>, 'width=<%= widget[:width]%>&d=<%= @dashboard.id %>');</script>
+<% end %>

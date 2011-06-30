@@ -16,10 +16,11 @@ class WidgetsController < ApplicationController
   end
   
   def burndowns
+    @dashboard = Dashboard.find(params[:d])
     @projects = @scrumninja.projects
     @burndowns = []
     @projects.each do |project|
-      next unless @project_map.keys.include? project.name.downcase
+      next unless @dashboard.projects.include? project.id.to_s
       burndown = @scrumninja.project_burndown project.id
       burndown.name = project.name
       @burndowns << burndown
@@ -38,11 +39,12 @@ class WidgetsController < ApplicationController
   end
 
   def grid
+    @dashboard = Dashboard.find(params[:d])
     @projects = @scrumninja.projects
     @rows = []
     @stories = []
     @projects.each do |project|
-      next unless @project_map.keys.include? project.name.downcase
+      next unless @dashboard.projects.include? project.id.to_s
       stories = @scrumninja.project_stories project.id
       people = @scrumninja.project_roles project.id
       card_wall = @scrumninja.project_card_wall project.id
@@ -66,7 +68,7 @@ class WidgetsController < ApplicationController
     end
     @stories.sort_by! {|story| story.updated_at }.reverse!
     @stories.each do |story|
-      @rows << [ story.name, @project_map[story.project_name.downcase], story.people.map {|person| person.nil? ? nil : person.user.email }, story.status ]
+      @rows << [ story.name, story.project_name.scan(/\b[A-Z]/)*'', story.people.map {|person| person.nil? ? nil : person.user.email }, story.status ]
     end
   end
 

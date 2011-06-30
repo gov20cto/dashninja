@@ -1,5 +1,9 @@
 Dashninja::Application.routes.draw do
 
+  resources :dashboards
+
+  devise_for :users
+
   get "widgets/arrow"
 
   get "widgets/bargraph"
@@ -24,5 +28,5 @@ Dashninja::Application.routes.draw do
 
   get "widgets/stockticker"
 
-  root :to => "home#index"
+  root :to => "dashboards#index"
 end

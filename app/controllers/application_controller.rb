@@ -1,13 +1,11 @@
 class ApplicationController < ActionController::Base
-  def initialize
-    @scrumninja = ScrumNinja::Client.new(APP_CONFIG['scrumninja'])
-    @project_map = {
-      "platform" => "PT",
-      "meeting efficiency" => "ME",
-      "citizen participation" => "CP",
-      "legislative management" => "LM",
-    }
-    super
-  end
+  before_filter :configure_scrumninja
+  
   protect_from_forgery
+  
+  def configure_scrumninja
+    if user_signed_in? then
+      @scrumninja = ScrumNinja::Client.new(current_user.scrumninja_key)
+    end
+  end
 end

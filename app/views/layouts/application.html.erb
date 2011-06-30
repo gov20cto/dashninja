@@ -2,22 +2,21 @@
 <html>
 <head>
   <title>DashNinja</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'scaffold' %>
   <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
-<style type='text/css'>
-#board {
-	width: 1020;
-	/* uncomment to rotate for vertical layouts
-	height: 100%;
-	-webkit-transform: rotate(-90deg); 
-	*/
-}
-</style>
 </head>
 <body>
-	<div id='board'>
-	<%= yield %>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<div id="user_nav">
+	  <% if user_signed_in? %>
+	    Signed in as <%= current_user.email %>. Not you?
+	    <%= link_to "Sign out", destroy_user_session_path %>
+	  <% else %>
+	    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+	  <% end %>
 	</div>
+	<%= yield %>
 </body>
 </html>

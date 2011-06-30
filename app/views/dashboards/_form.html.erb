@@ -1,0 +1,28 @@
+<%= form_for(@dashboard) do |f| %>
+  <% if @dashboard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
+
+      <ul>
+      <% @dashboard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <p><%= f.label :title %><br />
+  <%= f.text_field :title %></p>
+
+  <p><%= f.label :width, 'Screen Width (in pixels)' %><br />
+  <%= f.text_field :width %></p>
+
+
+
+<% @projects.each do |project| %>
+<%= f.check_box("projects", {:multiple => true,:checked => @dashboard.projects.include?(project.id.to_s)}, project.id,nil) %> <%= f.label :projects,project.name %><br/>
+<% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

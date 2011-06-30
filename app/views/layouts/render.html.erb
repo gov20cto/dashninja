@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @dashboard.title %></title>
+  <%= stylesheet_link_tag 'panic' %>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+<style type='text/css'>
+#board {
+	width: <%= @dashboard.width %>;
+	/* uncomment to rotate for vertical layouts
+	height: 100%;
+	-webkit-transform: rotate(-90deg); 
+	*/
+}
+</style>
+</head>
+<body>
+	<div id='board'>
+	<%= yield %>
+	</div>
+</body>
+</html>
