@@ -30,6 +30,8 @@ class DashboardsController < ApplicationController
   def new
     @dashboard = Dashboard.new
     
+    @dashboard.projects = []
+    
     @projects = @scrumninja.projects
 
     respond_to do |format|
