@@ -1,6 +1,5 @@
 class DashboardsController < ApplicationController
   before_filter :authenticate_user!
-  layout 'application', :except => [:show]
   
   # GET /dashboards
   # GET /dashboards.xml
@@ -16,13 +15,14 @@ class DashboardsController < ApplicationController
   # GET /dashboards/1
   # GET /dashboards/1.xml
   def show
-    self.class.layout 'render'
     @dashboard = Dashboard.find(params[:id])
 
     @widgets = [ 
       { :name => 'burndowns', :update => 120, :width => (@dashboard.width - 40), :class => 'middle'},
       { :name => 'grid', :update => 120, :width => (@dashboard.width - 40) }
     ]
+    
+    render :layout => false
   end
 
   # GET /dashboards/new
