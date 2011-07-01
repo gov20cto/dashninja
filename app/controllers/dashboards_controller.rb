@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
   # GET /dashboards
   # GET /dashboards.xml
   def index
-    @dashboards = Dashboard.all
+    @dashboards = current_user.dashboards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +49,7 @@ class DashboardsController < ApplicationController
   # POST /dashboards
   # POST /dashboards.xml
   def create
-    @dashboard = Dashboard.new(params[:dashboard])
+    @dashboard = current_user.dashboards.new(params[:dashboard])
 
     respond_to do |format|
       if @dashboard.save

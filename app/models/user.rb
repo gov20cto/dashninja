@@ -6,5 +6,6 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   field :scrumninja_key, :type => String
-   
+  
+  has_many :dashboards
 end
